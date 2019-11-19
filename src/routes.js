@@ -24,6 +24,7 @@ import TableList from "views/Tables.jsx";
 import Maps from "views/Map.jsx";
 import UserPage from "views/User.jsx";
 import UpgradeToPro from "views/Upgrade.jsx";
+import Contas from "views/Contas";
 
 var routes = [
   {
@@ -34,10 +35,10 @@ var routes = [
     layout: "/admin"
   },
   {
-    path: "/dashboard",
+    path: "/contas",
     name: "Contas",
     icon: "nc-icon nc-bank",
-    component: Dashboard,
+    component: Contas,
     layout: "/admin"
   },
   {
