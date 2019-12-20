@@ -15,9 +15,9 @@ class Contas extends React.Component {
 
   componentDidMount() {
 
-    const URL_TO_FETCH = "http://localhost:8080/minhas-contas-na-web/conta-agendada/contas";
+    const URL_TO_FETCH = "http://localhost:8080/minhas-contas-na-web/contas";
     fetch(URL_TO_FETCH, {
-      method: 'get' // opcional
+      method: 'get'
     })
       .then((response) => {
         response.json()
@@ -37,6 +37,10 @@ class Contas extends React.Component {
     if (this.state && this.state.items && Object.keys(this.state.items).length > 0) {
       return this.state.items.map((row, index) => {
         console.log('row', row);
+          if (row.error) {
+            alert('404-'+ row.error);
+            
+          }
 
         return Object.keys(row).map((chave, index) => {
           console.log(row[chave]);
@@ -46,8 +50,9 @@ class Contas extends React.Component {
 
           return <tr key={chave}>
             <td>{descricao}</td>
-            <td>{dtaVencimentoFormatada}</td>
-            <td>{new Intl.NumberFormat('pt-BR', {
+            <td className="text-center">{dtaVencimentoFormatada}</td>
+            {/* <td className="text-center">{dataVencimento}</td> */}
+            <td className="text-right">{new Intl.NumberFormat('pt-BR', {
               style: 'currency',
               currency: 'BRL'
             }).format(valor)}</td>
@@ -73,7 +78,7 @@ class Contas extends React.Component {
                     <thead className="text-primary">
                       <tr>
                         <th>Descrição</th>
-                        <th>Data de Vencimento</th>
+                        <th className="text-center">Data de Vencimento</th>
                         <th className="text-right">Valor</th>
                       </tr>
                     </thead>
@@ -84,7 +89,6 @@ class Contas extends React.Component {
                         <th></th>
                         <th><ContaDialog buttonLabel='Adicionar' /></th>
                       </tr>
-
                     </tbody>
                   </Table>
                 </CardBody>
